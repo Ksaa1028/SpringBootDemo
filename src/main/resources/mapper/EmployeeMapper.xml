@@ -1,0 +1,34 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.book.dao.EmployeeMapper">
+
+    <sql id="Base_Column">
+        id, last_name, email, gender, age
+    </sql>
+
+    <select id="selectAllByLastName" resultType="com.example.book.dao.Employee">
+        select <include refid="Base_Column"/>
+        from tbl_employee
+        where last_name = #{lastName}
+    </select>
+    <delete id="deleteById" parameterType="com.example.book.dao.Employee">
+        delete
+        from tbl_employee
+        where id=#{id}
+    </delete>
+
+    <insert id="insertEmployee" parameterType="com.example.book.dao.Employee">
+        insert into tbl_employee(id,last_name,email,age)
+        values(#{id},#{lastName},#{email},#{age})
+    </insert>
+
+    <update id="undateEmployee" parameterType="com.example.book.dao.Employee">
+        update tbl_employee
+        set last_name=#{lastName},email=#{email},age=#{age}
+        where id=#{id}
+    </update>
+
+
+</mapper>
